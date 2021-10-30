@@ -2,17 +2,43 @@ package graph;
 
 import drawing.DrawingApi;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class MatrixGraph extends Graph {
-    public MatrixGraph(DrawingApi drawingApi, List<List<Boolean>> matrix) {
+    private final List<List<Boolean>> matrix = new ArrayList<>();
+
+    public MatrixGraph(DrawingApi drawingApi) {
         super(drawingApi);
     }
 
     @Override
+    public int size() {
+        return matrix.size();
+    }
+
+    @Override
     public void drawGraph() {
-        drawingApi.drawCircle(100, 100, 1);
-        drawingApi.drawCircle(300, 300, 1);
-        drawingApi.drawLine(100 , 100, 300, 300);
+    }
+
+    @Override
+    public void readGraph() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Vertex:");
+        int n = scanner.nextInt();
+        System.out.println("Matrix:");
+        for (int i = 0; i < n; ++i) {
+            List<Boolean> row = new ArrayList<>();
+            for (int j = 0; j < n; ++j) {
+                int x = scanner.nextInt();
+                if (x == 1) {
+                    row.add(true);
+                } else {
+                    row.add(false);
+                }
+            }
+            matrix.add(row);
+        }
     }
 }
